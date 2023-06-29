@@ -16,7 +16,16 @@ const options = (): DataSourceOptions => {
     url,
     type: 'postgres',
     schema: 'public',
-    entities: [],
+    entities: [
+      join(
+        process.cwd(),
+        'dist',
+        'libs',
+        'entities',
+        '**',
+        '*.entity.{ts, js}',
+      ),
+    ],
     migrations: [join(process.cwd(), 'migrations', '**', '*migration.ts')],
     migrationsRun: true,
     migrationsTableName: 'migration',

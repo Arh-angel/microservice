@@ -9,6 +9,7 @@ import {
   validateSync,
 } from 'class-validator';
 import { Exclude } from 'class-transformer';
+import { DomainError } from '@lib/errors';
 
 export class PostAggregate extends PostServices implements IPost {
   @IsUUID()
@@ -47,7 +48,7 @@ export class PostAggregate extends PostServices implements IPost {
     const error = validateSync(_post, { whitelist: true });
 
     if (!!error.length) {
-      throw new Error('Post not valid!');
+      throw new DomainError(error, 'Post not valid!');
     }
 
     Object.assign(_post, post);

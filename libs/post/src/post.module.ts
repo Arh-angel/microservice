@@ -7,6 +7,8 @@ import { POST_EVENTS_HANDLERS } from '../aplication-servises/events';
 import { POST_QUERIES_HANDLERS } from '../aplication-servises/queries';
 import { PostFacade } from '../aplication-servises';
 import { PostFacadeFactory } from '../providers/post-facade.factory';
+import { PostRepository } from '../providers';
+import { PostAdapter } from '../providers/post.adapter';
 
 @Module({
   imports: [CqrsModule, TypeOrmModule.forFeature([PostEntity])],
@@ -18,6 +20,10 @@ import { PostFacadeFactory } from '../providers/post-facade.factory';
       provide: PostFacade,
       inject: [CommandBus, QueryBus, EventBus],
       useFactory: PostFacadeFactory,
+    },
+    {
+      provide: PostRepository,
+      useClass: PostAdapter,
     },
   ],
   exports: [PostFacade],

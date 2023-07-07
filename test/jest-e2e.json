@@ -20,6 +20,8 @@
     "@lib/errors/(.*)": "<rootDir>/../libs/errors/src/$1",
     "@lib/errors": "<rootDir>/../libs/errors/src",
     "@lib/shared/(.*)": "<rootDir>/../libs/shared/src/$1",
-    "@lib/shared": "<rootDir>/../libs/shared/src"
+    "@lib/shared": "<rootDir>/../libs/shared/src",
+    "@lib/auth/(.*)": "<rootDir>/../libs/auth/src/$1",
+    "@lib/auth": "<rootDir>/../libs/auth/src"
   }
 }

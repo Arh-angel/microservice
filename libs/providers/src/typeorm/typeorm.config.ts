@@ -26,7 +26,7 @@ const options = (): DataSourceOptions => {
         '*.entity{.ts,.js}',
       ),
     ],
-    migrations: [join(process.cwd(), 'migrations', '**', '*.ts')],
+    migrations: [join(process.cwd(), 'migrations', '**', '*{.ts}')],
     migrationsRun: true,
     migrationsTableName: 'migration',
   };

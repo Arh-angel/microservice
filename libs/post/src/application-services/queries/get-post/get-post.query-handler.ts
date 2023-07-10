@@ -1,8 +1,8 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetPostQuery } from './get-post.query';
 import { PostAggregate } from '@lib/post';
-import { PostRepository } from 'libs/post/providers';
 import { Logger } from '@nestjs/common';
+import { PostRepository } from '@lib/post/providers';
 
 @QueryHandler(GetPostQuery)
 export class GetPostQueryHandler

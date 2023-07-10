@@ -1,8 +1,8 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { SetPublishedCommand } from './set-published.command';
-import { PostRepository } from 'libs/post/providers';
 import { Logger, NotFoundException } from '@nestjs/common';
 import { PostAggregate } from '@lib/post';
+import { PostRepository } from '@lib/post/providers';
 
 @CommandHandler(SetPublishedCommand)
 export class SetPublishedCommandHandler

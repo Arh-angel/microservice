@@ -2,13 +2,13 @@ import { PostEntity } from '@lib/entities';
 import { Module, OnModuleInit } from '@nestjs/common';
 import { CommandBus, CqrsModule, EventBus, QueryBus } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { POST_COMMANDS_HANDLERS } from '../aplication-servises/commands';
-import { POST_EVENTS_HANDLERS } from '../aplication-servises/events';
-import { POST_QUERIES_HANDLERS } from '../aplication-servises/queries';
-import { PostFacade } from '../aplication-servises';
-import { PostFacadeFactory } from '../providers/post-facade.factory';
-import { PostRepository } from '../providers';
-import { PostAdapter } from '../providers/post.adapter';
+import { POST_EVENTS_HANDLERS } from './application-services/events';
+import { POST_QUERIES_HANDLERS } from './application-services/queries';
+import { PostFacade } from './application-services';
+import { PostFacadeFactory } from './providers/post-facade.factory';
+import { PostRepository } from './providers';
+import { PostAdapter } from './providers/post.adapter';
+import { POST_COMMANDS_HANDLERS } from './application-services/commands';
 
 @Module({
   imports: [CqrsModule, TypeOrmModule.forFeature([PostEntity])],

@@ -10,10 +10,11 @@ import {
 } from 'class-validator';
 import { Exclude } from 'class-transformer';
 import { DomainError } from '@lib/errors';
+import { randomUUID } from 'crypto';
 
 export class PostAggregate extends PostServices implements IPost {
   @IsUUID()
-  id: string = randomStringGenerator();
+  id: string = randomUUID();
 
   @IsString()
   @IsNotEmpty()
@@ -24,7 +25,6 @@ export class PostAggregate extends PostServices implements IPost {
   message: string;
 
   @IsUUID()
-  @IsNotEmpty()
   authorId: string;
 
   @IsBoolean()
@@ -44,6 +44,8 @@ export class PostAggregate extends PostServices implements IPost {
   static create(post: Partial<IPost>) {
     const _post = new PostAggregate();
 
+    Object.assign(_post, post);
+
     _post.updatedAt = post?.id ? new Date().toISOString() : _post.updatedAt;
 
     const error = validateSync(_post, { whitelist: true });
@@ -51,8 +53,6 @@ export class PostAggregate extends PostServices implements IPost {
     if (!!error.length) {
       throw new DomainError(error, 'Post not valid!');
     }
-
-    Object.assign(_post, post);
 
     return _post;
   }

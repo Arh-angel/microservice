@@ -21,13 +21,11 @@ export class PostAdapter implements PostRepository {
   ) {}
 
   async save(post: IPost): Promise<PostAggregate> {
-    if (post?.id) {
-      const existPost = this.findOne(post.id);
+    const existPost = await this.findOne(post.id);
 
-      if (!existPost) {
-        throw new NotFoundException(`Post by id ${post?.id} not found`);
-      }
+    console.log(existPost);
 
+    if (existPost) {
       const { id, ...toUpdate } = post;
       await this.postRepository.update({ id }, toUpdate);
       return await this.findOne(post.id);
@@ -37,7 +35,7 @@ export class PostAdapter implements PostRepository {
     return PostAggregate.create(savedPost);
   }
 
-  async findOne(id: string): Promise<PostAggregate | null> {
+  async findOne(id: string): Promise<PostAggregate> {
     const existPost = await this.postRepository
       .findOneBy({ id })
       .catch((err) => {
@@ -46,7 +44,7 @@ export class PostAdapter implements PostRepository {
       });
 
     if (!existPost) {
-      throw new NotFoundException(`Post by id ${id} not found`);
+      return null;
     }
 
     return PostAggregate.create(existPost);

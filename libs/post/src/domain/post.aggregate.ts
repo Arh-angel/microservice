@@ -48,7 +48,7 @@ export class PostAggregate extends PostServices implements IPost {
 
     _post.updatedAt = post?.id ? new Date().toISOString() : _post.updatedAt;
 
-    const error = validateSync(_post, { whitelist: true });
+    const error = validateSync(_post);
 
     if (!!error.length) {
       throw new DomainError(error, 'Post not valid!');

@@ -2,7 +2,6 @@ import { PostFacade } from '@lib/post/application-services';
 import { Body, Controller, Post } from '@nestjs/common';
 import { CreatePostDto } from './dto';
 import { CurrentUser, ICurrentUser } from '@lib/auth';
-import { randomStringGenerator } from '@nestjs/common/utils/random-string-generator.util';
 import { randomUUID } from 'crypto';
 
 @Controller('post')

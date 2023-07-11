@@ -2,6 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type PaginatedPosts {
+  data: [PostResponse!]
+  limit: Int!
+  offset: Int!
+  total: Int!
+}
+
 type PostResponse {
   """Id автора поста"""
   authorId: ID!
@@ -23,5 +30,12 @@ type PostResponse {
 }
 
 type Query {
-  post(id: String!): PostResponse!
+  getPost(id: String!): PostResponse!
+  getPosts(
+    """Количество строк"""
+    limit: Int! = 15
+
+    """Пропуск строк"""
+    offset: Int! = 0
+  ): PaginatedPosts!
 }

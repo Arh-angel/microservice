@@ -27,7 +27,18 @@ export class ConsumerService {
       };
     } catch (error) {
       this.logger.error(error);
-      return null;
+      return {
+        ...requestMessage,
+        payload: null,
+        error: this.errorHandler(error),
+      };
     }
   }
+
+  private errorHandler = (error) => {
+    return {
+      code: error?.name || 'error',
+      message: error?.message || JSON.stringify(error),
+    };
+  };
 }

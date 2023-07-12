@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.7.5",
+    "@golevelup/nestjs-rabbitmq": "^3.7.0",
     "@nestjs/apollo": "^12.0.7",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.0.0",

@@ -1,20 +1,24 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PaginatedPosts, PostResponse } from '../responses';
 import { PostFacade } from '@lib/post/application-services';
-import { CurrentUser, ICurrentUser } from '@lib/auth';
+import { GqlCurrentUser, ICurrentUser, Pablic } from '@lib/auth';
 import { PaginationDto } from '@lib/shared';
-import { PostAggregate } from '@lib/post';
 import { plainToInstance } from 'class-transformer';
 import { CreatePostInput, UpdatePostInput } from '../inputs';
+import { UseGuards } from '@nestjs/common';
+import { GqlGuard } from '@lib/auth/guards/gql.guard';
 
+@UseGuards(GqlGuard)
 @Resolver(() => PostResponse)
 export class PostResolver {
   constructor(private readonly postFacade: PostFacade) {}
+
+  @Pablic()
   @Query(() => PostResponse, { name: 'getPost' })
   async getPost(@Args('id') id: string) {
     return this.postFacade.queries.getPost(id);
   }
-
+  @Pablic()
   @Query(() => PaginatedPosts, { name: 'getPosts' })
   async getPosts(
     @Args() paginationDto: PaginationDto,
@@ -33,7 +37,7 @@ export class PostResolver {
 
   @Mutation(() => PostResponse, { name: 'createPost' })
   async createPost(
-    @CurrentUser() user: ICurrentUser,
+    @GqlCurrentUser() user: ICurrentUser,
     @Args('createPostInput') createPostInput: CreatePostInput,
   ) {
     return this.postFacade.commands.createPost({
@@ -44,7 +48,7 @@ export class PostResolver {
 
   @Mutation(() => PostResponse, { name: 'updatePost' })
   updatePost(
-    @CurrentUser() user: ICurrentUser,
+    @GqlCurrentUser() user: ICurrentUser,
     @Args('updatePost') updatePost: UpdatePostInput,
   ) {
     return this.postFacade.commands.updatePost({

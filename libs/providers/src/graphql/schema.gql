@@ -12,6 +12,8 @@ input CreatePostInput {
 
 type Mutation {
   createPost(createPostInput: CreatePostInput!): PostResponse!
+  deletePost(id: String!): Boolean!
+  setPublished(id: String!): PostResponse!
 }
 
 type PaginatedPosts {

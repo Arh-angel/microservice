@@ -53,13 +53,13 @@ export class PostResolver {
   //   });
   // }
 
-  // @Mutation()
-  // setPublished(@Args('id') id: string) {
-  //   return this.postFacade.commands.setPublished(id);
-  // }
+  @Mutation(() => PostResponse, { name: 'setPublished' })
+  setPublished(@Args('id') id: string) {
+    return this.postFacade.commands.setPublished(id);
+  }
 
-  // @Mutation()
-  // deletePost(@Args('id') id: string) {
-  //   return this.postFacade.commands.deletePost(id);
-  // }
+  @Mutation(() => Boolean, { name: 'deletePost' })
+  deletePost(@Args('id') id: string) {
+    return this.postFacade.commands.deletePost(id);
+  }
 }

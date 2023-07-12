@@ -5,7 +5,7 @@ import { CurrentUser, ICurrentUser } from '@lib/auth';
 import { PaginationDto } from '@lib/shared';
 import { PostAggregate } from '@lib/post';
 import { plainToInstance } from 'class-transformer';
-import { CreatePostInput } from '../inputs';
+import { CreatePostInput, UpdatePostInput } from '../inputs';
 
 @Resolver(() => PostResponse)
 export class PostResolver {
@@ -42,16 +42,16 @@ export class PostResolver {
     });
   }
 
-  // @Mutation()
-  // updatePost(
-  //   @CurrentUser() user: ICurrentUser,
-  //   @Args() updatePost: UpdatePostDto,
-  // ) {
-  //   return this.postFacade.commands.updatePost({
-  //     ...updatePost,
-  //     authorId: user.userId,
-  //   });
-  // }
+  @Mutation(() => PostResponse, { name: 'updatePost' })
+  updatePost(
+    @CurrentUser() user: ICurrentUser,
+    @Args('updatePost') updatePost: UpdatePostInput,
+  ) {
+    return this.postFacade.commands.updatePost({
+      ...updatePost,
+      authorId: user.userId,
+    });
+  }
 
   @Mutation(() => PostResponse, { name: 'setPublished' })
   setPublished(@Args('id') id: string) {

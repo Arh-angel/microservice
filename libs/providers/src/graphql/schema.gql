@@ -14,6 +14,7 @@ type Mutation {
   createPost(createPostInput: CreatePostInput!): PostResponse!
   deletePost(id: String!): Boolean!
   setPublished(id: String!): PostResponse!
+  updatePost(updatePost: UpdatePostInput!): PostResponse!
 }
 
 type PaginatedPosts {
@@ -52,4 +53,15 @@ type Query {
     """Пропуск строк"""
     offset: Int! = 0
   ): PaginatedPosts!
+}
+
+input UpdatePostInput {
+  """Id поста"""
+  id: ID!
+
+  """Текст поста"""
+  message: String
+
+  """Заголовок поста"""
+  title: String
 }

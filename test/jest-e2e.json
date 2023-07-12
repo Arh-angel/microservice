@@ -22,6 +22,8 @@
     "@lib/shared/(.*)": "<rootDir>/../libs/shared/src/$1",
     "@lib/shared": "<rootDir>/../libs/shared/src",
     "@lib/auth/(.*)": "<rootDir>/../libs/auth/src/$1",
-    "@lib/auth": "<rootDir>/../libs/auth/src"
+    "@lib/auth": "<rootDir>/../libs/auth/src",
+    "@lib/amqp-contracts/(.*)": "<rootDir>/../libs/amqp-contracts/src/$1",
+    "@lib/amqp-contracts": "<rootDir>/../libs/amqp-contracts/src"
   }
 }

@@ -42,37 +42,38 @@ export class PostFacade {
   private createPost(post: CreatePostDto) {
     return this.commandBas.execute<
       CreatePostCommand,
-      CreatePostCommandHandler['execute']
+      Awaited<ReturnType<CreatePostCommandHandler['execute']>>
     >(new CreatePostCommand(post));
   }
   private updatePost(post: UpdatePostDto) {
     return this.commandBas.execute<
       UpdatePostCommand,
-      UpdatePostCommandHandler['execute']
+      Awaited<ReturnType<UpdatePostCommandHandler['execute']>>
     >(new UpdatePostCommand(post));
   }
   private deletePost(id: string) {
     return this.commandBas.execute<
       DeletePostCommand,
-      DeletePostCommandHandler['execute']
+      Awaited<ReturnType<DeletePostCommandHandler['execute']>>
     >(new DeletePostCommand(id));
   }
   private setPublished(id: string) {
     return this.commandBas.execute<
       SetPublishedCommand,
-      SetPublishedCommandHandler['execute']
+      Awaited<ReturnType<SetPublishedCommandHandler['execute']>>
     >(new SetPublishedCommand(id));
   }
 
   private getPost(id: string) {
-    return this.queryBas.execute<GetPostQuery, GetPostQueryHandler['execute']>(
-      new GetPostQuery(id),
-    );
+    return this.queryBas.execute<
+      GetPostQuery,
+      Awaited<ReturnType<GetPostQueryHandler['execute']>>
+    >(new GetPostQuery(id));
   }
   private getPosts(pagination: PaginationDto) {
     return this.queryBas.execute<
       GetPostsQuery,
-      GetPostsQueryHandler['execute']
+      Awaited<ReturnType<GetPostsQueryHandler['execute']>>
     >(new GetPostsQuery(pagination));
   }
 }

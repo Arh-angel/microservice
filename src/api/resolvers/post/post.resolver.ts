@@ -24,8 +24,6 @@ export class PostResolver {
     @Args() paginationDto: PaginationDto,
   ): Promise<PaginatedPosts> {
     const pagination = plainToInstance(PaginationDto, paginationDto);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
     const [data, count] = await this.postFacade.queries.getPosts(pagination);
 
     return {

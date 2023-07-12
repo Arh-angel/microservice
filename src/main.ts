@@ -24,6 +24,10 @@ async function bootstrap() {
       `Swagger documentation started on http://localhost:${port}/api-doc`,
       'Main',
     );
+    Logger.log(
+      `GraphQl Playgroud started on http://localhost:${port}/graphql`,
+      'Main',
+    );
   });
 }
 bootstrap();
